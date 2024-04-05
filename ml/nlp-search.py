@@ -2,7 +2,7 @@ import spacy
 from spacy.matcher import Matcher
 
 
-class Nlp_Search:
+class NLP_Search:
     def __init__(self, text: str):
         self.nlp_ru = spacy.load("ru_core_news_sm")
         self.nlp_eu = spacy.load("en_core_web_sm")
@@ -53,4 +53,4 @@ class Nlp_Search:
 
 
 if __name__ == '__main__':
-    print(Nlp_Search("Конверт стрип, C4, 229x324, офсет, 90 г/м2, 500 штук, белый, внутр запечатка, Ряжская печатная фабрика (упак)").search_all())
+    print(NLP_Search("Конверт стрип, C4, 229x324, офсет, 90 г/м2, 500 штук, белый, внутр запечатка, Ряжская печатная фабрика (упак)").search_all())
