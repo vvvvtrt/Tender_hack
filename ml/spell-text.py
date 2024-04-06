@@ -25,7 +25,7 @@ def spell_text(raw_text):
     device = torch.device('cpu')
     predicts = model.generate(**encoded.to(device))
 
-    return tokenizer.batch_decode(predicts, skip_special_tokens=True)
+    return tokenizer.batch_decode(predicts, skip_special_tokens=True)[0]
 
 
 if __name__ == '__main__':
