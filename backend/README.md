@@ -2,6 +2,8 @@
 
 ## Run local
 
+- #### Run in `python 3.10.4`!
+
 - For install all requirements after creating a virtual environment (`venv`)
 
     ```bash
