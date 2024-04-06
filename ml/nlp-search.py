@@ -20,6 +20,7 @@ class NLP_Search:
         ans_dict = {}
 
         ans_dict["categories"] = self.classification()
+        ans_dict["country"] = self.search_country()
         ans_dict["company"] = self.search_company()
         ans_dict["units"] = self.search_units()
 
@@ -33,6 +34,18 @@ class NLP_Search:
 
             for entity in doc.ents:
                 if entity.label_ == "ORG":
+                    ans += entity.text + " "
+
+        return ans
+
+    def search_country(self) -> str:
+        ans = ""
+
+        for nlp in [self.nlp_ru, self.nlp_eu]:
+            doc = nlp(self.text)
+
+            for entity in doc.ents:
+                if entity.label_ == "GPE":
                     ans += entity.text + " "
 
         return ans
