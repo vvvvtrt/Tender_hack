@@ -1,3 +1,5 @@
+# добавить свою модель
+
 import torch
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 
