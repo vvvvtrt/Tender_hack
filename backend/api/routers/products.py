@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 
 from backend.api.schemas.products import (ProductInput, ProductOutputGenerated,
                                           ProductOutputNew)
-
+from backend.core.controllers.products import processing
 
 
 product_router = APIRouter(
@@ -15,14 +15,9 @@ product_router = APIRouter(
 async def get_user(product: ProductInput):
     print(product)
     if len(product.name) > 0:
-        test_product = {
-            "update_name": "product",
-            "type": "product",
-            "model": "product",
-            "producer": "product",
-            "units": "product",
-
-        }
+        test_product = processing(product.name)
+        test_product["update_name"] = product.name
+        test_product["model"] = "model"
         return test_product
     else:
         raise HTTPException(status_code=400, detail="Bad Request!")
@@ -36,8 +31,7 @@ async def get_user(product: ProductOutputNew):
             "type": "product",
             "model": "product",
             "producer": "product",
-            "units": "product",
-
+            "units": "product"
         }
         return test_product
     else:

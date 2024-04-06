@@ -7,9 +7,10 @@ class ProductInput(BaseModel):
 
 class ProductOutputBase(BaseModel):
     type: str
-    model: str
+    country: str
     producer: str
     units: str
+    model: str
 
 
 class ProductOutputGenerated(ProductOutputBase):

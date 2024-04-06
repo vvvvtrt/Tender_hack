@@ -19,9 +19,9 @@ class NLP_Search:
     def search_all(self) -> dict:
         ans_dict = {}
 
-        ans_dict["categories"] = self.classification()
+        ans_dict["type"] = self.classification()
         ans_dict["country"] = self.search_country()
-        ans_dict["company"] = self.search_company()
+        ans_dict["producer"] = self.search_company()
         ans_dict["units"] = self.search_units()
 
         return ans_dict
