@@ -1,0 +1,43 @@
+.similar-ul{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    height: 100%;
+    max-height: 497px;
+    width: 100%;
+    padding-left: 0;
+    overflow-y: scroll;
+
+}
+
+.li-similar{
+    display: flex;
+    flex-direction: row;
+    min-height: 40px;
+    border-bottom: 1px solid rgb(212, 219, 230);
+    padding-bottom: 4px;
+
+}
+
+.img-similar{
+    min-width: 200px;
+    max-width: 400px;
+}
+
+.buttons-similar-cont{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: auto;
+
+}
+
+.button-similar{
+    color: white;
+    background-color: green;
+    max-width: 140px;
+    width: 10vw;
+    min-width: 80px;
+
+    font-size: 1em;
+}

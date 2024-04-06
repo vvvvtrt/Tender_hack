@@ -1,0 +1,31 @@
+/* .main{
+    padding: 10px 165px;
+
+} */
+
+.form--main{
+    border: 1px solid rgba(212, 223, 237, 0.8);
+    box-sizing: border-box;
+    padding: 20px;
+    margin-bottom: 20px;
+
+}
+
+.window{
+    display: flex;
+    flex-direction: rows;
+    gap: 10px;
+
+}
+
+.send-cte{
+    background-color: red;
+    color: white;
+
+}
+
+.main-h{
+    display: inline-block;
+    font-size: 1.5rem;
+    margin: 0;
+}
