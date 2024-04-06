@@ -1,6 +1,13 @@
 import spacy
 from spacy.matcher import Matcher
+import torch
+from transformers import T5ForConditionalGeneration, T5Tokenizer
 
+
+NAME_MODEL = "classification_model"
+
+tokenizer = T5Tokenizer.from_pretrained(NAME_MODEL)
+model = T5ForConditionalGeneration.from_pretrained(NAME_MODEL)
 
 class NLP_Search:
     def __init__(self, text: str):
@@ -12,6 +19,7 @@ class NLP_Search:
     def search_all(self) -> dict:
         ans_dict = {}
 
+        ans_dict["categories"] = self.classification()
         ans_dict["company"] = self.search_company()
         ans_dict["units"] = self.search_units()
 
@@ -49,6 +57,15 @@ class NLP_Search:
             ans.append(unit)
 
         return ans
+
+    def classification(self):
+        inputs = tokenizer(self.text, return_tensors='pt')
+
+        with torch.no_grad():
+            hypotheses = model.generate(**inputs, num_beams=5)
+
+        return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
+
 
 
 
