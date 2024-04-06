@@ -1,0 +1,48 @@
+version: '3.7'
+
+name: 'service-tender-hack'
+
+volumes:
+  postgres-data:
+
+networks:
+  postgres-network:
+    driver: bridge
+
+
+services:
+  database:
+    container_name: postgres-container
+    image: 'postgres:15'
+    env_file:
+      - ../../backend/.env
+    environment:
+      TZ: 'GMT+3'
+      PGTZ: 'GMT+3'
+    restart: unless-stopped
+    volumes:
+      - create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres-network
+
+  backend:
+    container_name: backend-container
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+    restart: unless-stopped
+    env_file:
+      - ../backend/.env
+    environment:
+      - "POSTGRES_HOST=database"
+      - "TZ=Europe/Moscow"
+    command: "uvicorn backend.main:app --port ${BACKEND_PORT} --host 0.0.0.0"
+    ports:
+      - "8000:8000"
+    networks:
+      - postgres-network
