@@ -11,10 +11,10 @@
 - For work in network
 
     ```bash
-    uvicorn app.main:app --reload --port 8000 --host 0.0.0.0
+    uvicorn backend.main:app --reload --port 8000 --host 0.0.0.0
     ```
 - For work in local machine
 
     ```bash
-    uvicorn app.main:app --reload --port 8000 --host localhost
+    uvicorn backend.main:app --reload --port 8000 --host localhost
     ```

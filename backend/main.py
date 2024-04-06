@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-# from app.routers import (some_router)
+from backend.api.routers.products import (product_router)
 
 app = FastAPI(
     title="API for Tender Hack",
@@ -8,4 +8,4 @@ app = FastAPI(
     version="1.0",
 )
 
-# app.include_router(some_router)
+app.include_router(product_router)
