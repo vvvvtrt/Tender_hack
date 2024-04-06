@@ -20,6 +20,7 @@ class NLP_Search:
         ans_dict = {}
 
         ans_dict["categories"] = self.classification()
+        ans_dict["country"] = self.search_country()
         ans_dict["company"] = self.search_company()
         ans_dict["units"] = self.search_units()
 
@@ -33,6 +34,18 @@ class NLP_Search:
 
             for entity in doc.ents:
                 if entity.label_ == "ORG":
+                    ans += entity.text + " "
+
+        return ans
+
+    def search_country(self) -> str:
+        ans = ""
+
+        for nlp in [self.nlp_ru, self.nlp_eu]:
+            doc = nlp(self.text)
+
+            for entity in doc.ents:
+                if entity.label_ == "GPE":
                     ans += entity.text + " "
 
         return ans
@@ -65,3 +78,9 @@ class NLP_Search:
             hypotheses = model.generate(**inputs, num_beams=5)
 
         return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
+
+
+
+
+if __name__ == '__main__':
+    print(NLP_Search("Конверт стрип, C4, 229x324, офсет, 90 г/м2, 500 штук, белый, внутр запечатка, Ряжская печатная фабрика (упак)").search_all())
