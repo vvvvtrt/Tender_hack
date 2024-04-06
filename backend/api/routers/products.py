@@ -13,12 +13,12 @@ product_router = APIRouter(
 async def get_user(product: ProductInput):
     if len(product.name) > 0:
         test_product = {
-            "update_name": "product",
-            "type": "product",
-            "model": "product",
-            "producer": "product",
-            "units": "product",
-
+            "update_name": "update_name",
+            "type": "type",
+            "model": "model",
+            "producer": "producer",
+            "units": "units",
+            "country": "country"
         }
         return test_product
     else:
@@ -29,12 +29,12 @@ async def get_user(product: ProductInput):
 async def get_user(product: ProductOutputNew):
     if len(product.name) > 0:
         test_product = {
-            "name": "product",
-            "type": "product",
-            "model": "product",
-            "producer": "product",
-            "units": "product",
-
+            "update_name": "update_name",
+            "type": "type",
+            "model": "model",
+            "producer": "producer",
+            "units": "units",
+            "country": "country"
         }
         return test_product
     else:
