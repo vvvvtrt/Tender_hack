@@ -3,11 +3,11 @@ from spacy.matcher import Matcher
 import torch
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 
-
 NAME_MODEL = "classification_model"
 
 tokenizer = T5Tokenizer.from_pretrained(NAME_MODEL)
 model = T5ForConditionalGeneration.from_pretrained(NAME_MODEL)
+
 
 class NLP_Search:
     def __init__(self, text: str):
@@ -80,7 +80,6 @@ class NLP_Search:
         return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
 
 
-
-
 if __name__ == '__main__':
-    print(NLP_Search("Конверт стрип, C4, 229x324, офсет, 90 г/м2, 500 штук, белый, внутр запечатка, Ряжская печатная фабрика (упак)").search_all())
+    print(NLP_Search(
+        "Конверт стрип, C4, 229x324, офсет, 90 г/м2, 500 штук, белый, внутр запечатка, Ряжская печатная фабрика (упак)").search_all())

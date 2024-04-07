@@ -1,3 +1,11 @@
-venv
-.env
 .idea
+
+venv
+venv3.9
+.env
+
+__pycache__
+
+/ml/classification_model/model.safetensors
+/ml/classification_model/spiece.model
+/ml/models/classification_model/spiece.model
