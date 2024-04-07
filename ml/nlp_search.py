@@ -1,18 +1,19 @@
 import spacy
 from spacy.matcher import Matcher
 import torch
-from transformers import T5ForConditionalGeneration, T5Tokenizer
+from transformers import T5ForConditionalGeneration, T5Tokenizer, GPT2LMHeadModel, GPT2Tokenizer
 import requests
 import pymorphy2
 
 NAME_MODEL = "classification_model"
-NAME_MODEL2 = "generate_model"
+
 
 tokenizer = T5Tokenizer.from_pretrained(NAME_MODEL)
 model = T5ForConditionalGeneration.from_pretrained(NAME_MODEL)
 
-tokenizer1 = T5Tokenizer.from_pretrained(NAME_MODEL2)
-model1 = T5ForConditionalGeneration.from_pretrained(NAME_MODEL2)
+model_name = "IlyaGusev/rugpt_large_turbo_instructed"
+tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+model = GPT2LMHeadModel.from_pretrained(model_name)
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -157,12 +158,11 @@ class NLP_Search:
 
 
     def genirate(self):
-        inputs = tokenizer(self.text, return_tensors='pt')
+        input_ids = tokenizer.encode("перефразируй и измени структуру: " + self.text + "\nВыход:", return_tensors='pt')
+        output = model.generate(input_ids, max_length=100, num_return_sequences=1, early_stopping=True)
 
-        with torch.no_grad():
-            hypotheses = model.generate(**inputs, num_beams=5)
-
-        return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
+        generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
+        return generated_text.split("Выход:")[1]
 
 
 if __name__ == '__main__':
