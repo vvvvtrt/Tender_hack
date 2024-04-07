@@ -8,8 +8,8 @@ import pymorphy2
 
 NAME_MODEL = "classification_model"
 
-# tokenizer = T5Tokenizer.from_pretrained(NAME_MODEL)
-# model = T5ForConditionalGeneration.from_pretrained(NAME_MODEL)
+tokenizer = T5Tokenizer.from_pretrained(NAME_MODEL)
+model = T5ForConditionalGeneration.from_pretrained(NAME_MODEL)
 morph = pymorphy2.MorphAnalyzer()
 
 class NLP_Search:
@@ -24,7 +24,7 @@ class NLP_Search:
         ans_dict = {}
 
         ans_dict["name"] = ""
-        # ans_dict["categories"] = self.classification()
+        ans_dict["categories"] = self.classification()
         ans_dict["country"] = self.search_country()
         ans_dict["company"] = self.search_company()
         ans_dict["model"] = self.search_model(ans_dict["company"])
@@ -144,13 +144,13 @@ class NLP_Search:
 
         return ans
 
-    # def classification(self):
-    #     inputs = tokenizer(self.text, return_tensors='pt')
+    def classification(self):
+        inputs = tokenizer(self.text, return_tensors='pt')
 
-    #     with torch.no_grad():
-    #         hypotheses = model.generate(**inputs, num_beams=5)
+        with torch.no_grad():
+            hypotheses = model.generate(**inputs, num_beams=5)
 
-    #     return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
+        return tokenizer.decode(hypotheses[0], skip_special_tokens=True)
 
 
 
