@@ -158,7 +158,7 @@ class NLP_Search:
 
 
     def genirate(self):
-        input_ids = tokenizer.encode("перефразируй и измени структуру: " + self.text + "\nВыход:", return_tensors='pt')
+        input_ids = tokenizer.encode("Измени смысл:" + self.text + "\nВыход:", return_tensors='pt')
         output = model.generate(input_ids, max_length=100, num_return_sequences=1, early_stopping=True)
 
         generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
